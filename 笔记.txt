@@ -1,0 +1,108 @@
+P1 P2
+
+一、既然我们有这些的接口测试工具，为什么要做接口做自动化 ?
+1.敏捷开发，接口一般数量很大，团队实现接口测试，版本控制。
+2.功能太死板，有些接口完全无法实现( 复杂的加密接口，签名接口等)
+3.接口项目当中有多种不同协议的接口。
+4.排错，定位接口问题不方便，结合抓包实现
+5.没有办法生成美观的报告。
+6.多接口串联，数据库验证，日志监控
+7.有些公司做web自动化+接口自动化。
+
+二、python+requests模块requests第三方库，主要用于发送http请求，做接口自动化。pip install requests
+
+三、requests全局观
+1.requests.get()发送qet请求
+2.requests.post()发送post请求
+3.requests.delete()发送delete请求
+4.requests.put()发送put请求
+5.requests.request()最核心的方法
+响应:response对象 rep = requests.request()
+#返回字符串的数据 print(rep.text
+#返回字节格式的数据 print(rep.content
+#返回字典格式的数据 print(rep.json())
+#状态码 print(rep.status_code)
+#返回状态信息 print(rep.reason)
+返回cookie信息 print(rep.cookies)
+返回编码格式 print(rep.encoding)
+#返回响应头信息 print(rep.headers)
+
+P3 P4
+
+四、接口实战
+请求方式:get,post,delete,put
+请求参数类型 :键值对，JSON格式，文件格式
+
+线性脚本: NO
+
+unittest、pytest用例管理框架:
+
+pytest默认规则 :
+1.py文件必须以test 开头或者 test结尾
+2.类名必须以Test开头
+3.测试用例必须以test 开头
+
+注意:
+get请求通过params传递参数
+post请求通过ison或者data传参。他们的区别是什么?文件上传通过files传参
+
+data
+数据报文: dict字典类型，那么默认情况下请求头: applilcation/x-www-form-urlencoded，表示以form表单的方式传参，格式:a=1&b=2&c=3
+数据报文: str类型，那么默认情况下 : text/plain (如果是字典格式需要转换成str格式传参)
+
+json
+数据报文: 不管是dict还是str类型，默认都是application/ison，格式:"a":1,"b"2
+
+son.dumps(data) 序列化把字典格式的数据转换成str格式。
+ison.loads(data) 反序列化把str格式转换成字典格式
+
+总结:data只能传简单的只有键值对的dict或者是str格式。json一般只能传dict格式(简单和嵌都可以)
+
+cookie鉴权:网页的接口基本上都要做cookie鉴权。这种不常用通过session实现cookie鉴权，这种常用。
+
+五、接口自动化测试框架封装
+
+接口自动化框架封装的第一步。统一请求方式最核心的方法
+5.requests.request()
+session会话
+
+P5 P6 P7 P8
+
+一、pytest用例管理框架
+pytest默认规则:
+1.py文件必须以test_开头或者_test结尾
+2.类名必须以Test开头
+3.测试用例必须以test_开头
+pytest用例管理框架的作用 ?
+发现测试用例: 从多个py文件中通过默认的规则去找测试用例
+执行测试用例: 顺序和条件判断测试结果:断言生成测试报告: html.alure
+python:unittestxpytestjava:junit.testng
+
+二、pytest全局观
+1.它可以和所有的自动化测试工具selenium,requests,appium结合实现web自动化，接厂自动化以及app自动化。
+2.跳过用例以及失败用例重跑
+3.结合allure生成美观的测试报告
+4.和jenkins持续集成。
+5.有很多的强大插件。
+pytest-html 生成html测试报告
+pytest-xdist 多线程运行
+pytest-ordering 改变测试用例的执行顺序pytest-rerunfailures 失败用例重跑allure-pytest 生成allure测试报告
+一般实际项目开发当中都会使用requrements.txt文件保存插件名称然后通过 : pip install -r requrements.txt
+
+三、运行方式
+1.主函数的方式(命行的方式
+-v 输出更加详细的运行信息
+-s 输入调试信息
+-n 多线程运行
+--reruns 数字 失败用例重跑
+..htmml=报告的路径
+2.实际工作中使用pytestin的配置文件来配置运行。
+
+四、前后置，夹具
+setup/teardown 在每个用例之前和之后执行一次setup_class/teardown _class 在每个类之前和之后执行一次
+实现部分的前置 ?
+我想其中一个用例做数据库验证，那么怎么办 ?
+10000/800
+
+部分前置:
+@pytest.fixtiue()
