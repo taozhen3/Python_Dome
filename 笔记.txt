@@ -86,23 +86,44 @@ python:unittestxpytestjava:junit.testng
 5.有很多的强大插件。
 pytest-html 生成html测试报告
 pytest-xdist 多线程运行
-pytest-ordering 改变测试用例的执行顺序pytest-rerunfailures 失败用例重跑allure-pytest 生成allure测试报告
-一般实际项目开发当中都会使用requrements.txt文件保存插件名称然后通过 : pip install -r requrements.txt
+pytest-ordering 改变测试用例的执行顺序
+pytest-rerunfailures 失败用例重跑
+allure-pytest 生成allure测试报告
+
+一般实际项目开发当中都会使用requrements.txt文件保存插件名称
+然后通过 : pip install -r requrements.txt
 
 三、运行方式
-1.主函数的方式(命行的方式
+1.主函数的方式(命行的方式）
 -v 输出更加详细的运行信息
 -s 输入调试信息
 -n 多线程运行
 --reruns 数字 失败用例重跑
 ..htmml=报告的路径
-2.实际工作中使用pytestin的配置文件来配置运行。
+2.实际工作中使用pytest.ini的配置文件来配置运行。
 
 四、前后置，夹具
-setup/teardown 在每个用例之前和之后执行一次setup_class/teardown _class 在每个类之前和之后执行一次
+setup/teardown 在每个用例之前和之后执行一次
+setup_class/teardown_class 在每个类之前和之后执行一次
+
 实现部分的前置 ?
 我想其中一个用例做数据库验证，那么怎么办 ?
 10000/800
 
 部分前置:
-@pytest.fixtiue()
+@pytest.fixtrue(scope="作用域”，params="数据驱动”，autouse="自动执行”ids="自定义参数名"name="重命名")
+作用域 :function(函数) ，class（类），module（模块），package/session（包）
+
+可以通过vield唤醒类似teardown的功能，简单理解就是返回。
+vield和return都表示返回数据的意思只是区分在于，yield返回多次以及多个数据，return只会返回一次，return之后不能接代码.
+
+一般情况下:
+@pytest.fixtrue()一般会和conftest.py文件一起使用
+
+conftest.py名称是固定的，功能很强大。
+1.conftest.py文件是单独存放@pytest.fixtrue()的方法。用处是可以在多个py文件之间共享前置配置
+2.conftest.py里面的方法在调用时不需要导入，可以直接使用。
+3..conftest.py可以有多个。也可以有多个不同层级
+
+P9
+五、接口自动化测试框架

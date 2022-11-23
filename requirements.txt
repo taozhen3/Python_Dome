@@ -1,9 +1,11 @@
 一般项目使用该文件保存插件名称，使用pip install -r 文件名 一次性安装所有插件
 命令 pip install -r rerunfailures.txt
 删掉前三行
-pytest
+pytest~=6.2.4
 pytest-html
 pytest-xdist
 pytest-ordering
 pytest-rerunfailures
 allure-pytest
+requests~=2.27.1
+PyYAML~=6.0
