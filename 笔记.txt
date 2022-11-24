@@ -126,4 +126,39 @@ conftest.py名称是固定的，功能很强大。
 3..conftest.py可以有多个。也可以有多个不同层级
 
 P9
-五、接口自动化测试框架
+五、接口自动化测试框架(接口关联的封装）
+一般情况下，我们是通过一个关联的vami文件来实现。
+
+六、pytest接口断言
+assert
+
+P10
+七、pytest结合allure-pytest生成allure测试报告
+
+1官网下载allur :https://github.com/allure-framework/allure2/releases
+放到没有中文的路径下，然后把E:lallure-2.13.7bin配置到环境变量的path里面
+
+2.重启pycharm
+通过:allure --version验证
+如果报错，使用管理员打开pycharm
+
+P11
+一 接口自动化测试框架YAML数据驱动的封装
+@pytest.mark.parametrize(args name,args value)args name:参数名
+args_value: 参数值(使用list列表，tuple元祖，字典列表，字典元祖等)在数据中有多少个值，那接口用例就会执行多少次。
+
+class TestApi:
+列表
+    @pytest.mark.parametrize('args', ['张三', '李四', '王五'])
+    def test_api1(self, args):
+        print(args)
+列表中的列表
+    @pytest.mark.parametrize('name, age', [['张三', 18], ['李四', 20],  ['王五', 30]])
+    def test_api2(self, name, age):
+        print(name, age)
+
+
+if __name__ == '__main__':
+    pytest.main(['test_api.py'])
+
+P12
