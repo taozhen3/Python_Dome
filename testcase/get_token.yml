@@ -1,0 +1,14 @@
+-
+
+  name: 获得统一的鉴权码token
+  request:
+    method: post
+    url: https://boss.sdf.testxyy.cn/backApi/sxx/uas/UserBasicMS/bossInteraction/doLogin
+    headers:
+      utype: boss
+      Content-Type: application/json
+      EncryptType: AES
+    data:
+      userName: amSRwwDvBGjfu638KBwAbA==
+      password: VO4AUibpUy2SUAdzYFm40Q==
+  validate: None
